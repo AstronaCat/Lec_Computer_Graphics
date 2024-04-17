@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Initial Drawing</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        .html {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-self: flex-start;
+        }
+
+        .button-container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            border: none;
+            border-radius: 7px;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: solid;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0px 10px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #04aa6D;
+            border-width: 3px;
+        }
+
+        .button1:hover {
+            background-color: hwb(158 0% 13%);
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ff510c;
+            border-width: 3px;
+        }
+
+        .button2:hover {
+            background-color: hwb(22 33% 0%);
+            color: white;
+        }
+
+        .button3 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CDA;
+            border-width: 3px;
+        }
+
+        .button3:hover {
+            background-color: hwb(201 28% 0%);
+            color: white;
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 24px;
+            color: cadetblue;
+            margin-top: 100px;
+        }
+
+        canvas {
+            align-self: center;
+            margin-bottom: 50px;
+        }
+
+        select {
+            width: 200px;
+            align-self: center;
+        }
+
+        #color-change-info {
+            margin-top: 50px;
+            font-weight: bold;
+            text-decoration: underline;
+            color: black;
+            text-align: center;
+        }
+    </style>
+
+
+    <!-- vertex shader handles vertex information -->
+    <!-- minimum info: location of a vertex -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+uniform float theta;
+
+void main()
+{
+    gl_PointSize = 3.0;
+
+    float sin = sin( theta );
+    float cos = cos( theta );
+
+    gl_Position.x = -sin * vPosition.y + cos * vPosition.x;
+    gl_Position.y = sin * vPosition.x + cos * vPosition.y;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
+}</script>
+
+    <!-- fragment shader -->
+    <!-- minimum info: color of a fragment -->
+    <script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 fColor;
+
+void main()
+{
+    gl_FragColor = fColor;
+}</script>
+
+    <script type="text/javascript" src="../../Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../../Common/MV.js"></script>
+    <script type="text/javascript" src="initial.js"></script>
+</head>
+
+<body>
+    <div class="html">
+
+        <div id="title">Assignment#1 Draw My Initial</div>
+
+        <div class="button-container">
+            <button id="Start" class="button button1">Start rotation</button>
+            <button id="Stop" class="button button3">Stop rotation</button>
+            <button id="Reset" class="button button2">Reset</button>
+        </div>
+
+        <canvas id="gl-canvas" width="512" height="300">
+            Oops ... your browser doesn't support the HTML5 canvas element
+        </canvas>
+
+        <select id="Animation Controls" size="3">
+            <option value="0" index="0">Change rotation direction</option>
+            <option value="1" index="1">Spin faster</option>
+            <option value="2" index="2">Spin slower</option>
+        </select>
+
+        <div id="color-change-info">Press 'r' for red, 'g' for green, 'b' for blue to change colors.</div>
+    </div>
+</body>
+
+</html>
