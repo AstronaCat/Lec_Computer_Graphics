@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<title>Initial Drawing</title>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Initial 3D Drawing</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 90vh;
+            width: 95vw;
+        }
+
+        .html {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-self: flex-start;
+        }
+
+        .button-container {
+            margin-top: 50px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container2 {
+            margin-top: 50px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            border: none;
+            border-radius: 7px;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: solid;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0px 10px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #04aa6D;
+            border-width: 3px;
+        }
+
+        .button1:hover {
+            background-color: hwb(158 0% 13%);
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ff510c;
+            border-width: 3px;
+        }
+
+        .button2:hover {
+            background-color: hwb(22 33% 0%);
+            color: white;
+        }
+
+        .button3 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CDA;
+            border-width: 3px;
+        }
+
+        .button3:hover {
+            background-color: hwb(201 28% 0%);
+            color: white;
+        }
+
+        .button4 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ff0000;
+            border-width: 3px;
+        }
+
+        .button4:hover {
+            background-color: hwb(0 16% 0%);
+            color: white;
+        }
+
+        .button5 {
+            padding: 16px 16px;
+            background-color: white;
+            color: black;
+            border: 2px solid #f0ff1e;
+        }
+
+        .button5:hover {
+            background-color: hwb(0 20% 80%);
+            color: white;
+        }
+
+        .button6 {
+            padding: 16px 16px;
+            background-color: white;
+            color: black;
+            border: 2px solid #52ff69;
+        }
+
+        .button6:hover {
+            background-color: hwb(0 39% 61%);
+            color: white;
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 24px;
+            color: rgb(0, 0, 0);
+            margin-top: 30px;
+        }
+
+        canvas {
+            align-self: center;
+        }
+
+        .info {
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+uniform mat4 modelViewMatrix;
+
+void main()
+{
+    gl_PointSize = 3.0;
+    gl_Position = modelViewMatrix * vPosition;
+
+}</script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 fColor;
+
+void main() {
+    gl_FragColor=fColor;
+}
+</script>
+        <script type="text/javascript" src="webgl-utils.js"></script>
+        <script type="text/javascript" src="initShaders.js"></script>
+        <script type="text/javascript" src="MV.js"></script>
+        <script type="text/javascript" src="initial3D.js"></script>
+    </head>
+
+<body>
+    <div class="html">
+
+        <div id="title">Assignment#2 Draw My "3D" Initial</div>
+
+        <div class="button-container">
+            <button id="X" class="button button1">X-axis Rotation</button>
+            <button id="Y" class="button button2">Y-axis Rotation</button>
+            <button id="Z" class="button button3">Z-axis Rotation</button>
+            <button id="Stop" class="button button4">STOP</button>
+        </div>
+
+        <canvas id="gl-canvas" width="1024" height="500">
+            Oops ... your browser doesn't support the HTML5 canvas element
+        </canvas>
+        <div class="info">
+            <p>Current Eye(Camera) Position: <span id="eyePosition"></span></p>
+            <div id="lookAt-info">
+                Press keyboard arrows to move the camera upward, downward, left, and right.
+                <br>
+                Also, you can modify the z-coordinate of camera using number key "0" or "9".
+            </div>
+        </div>
+
+        <div class="button-container2">
+            <button id="xup" class="button button5">X-Scale Up</button>
+            <button id="xdown" class="button button6">X-Scale Down</button>
+            <button id="yup" class="button button5">Y-Scale Up</button>
+            <button id="ydown" class="button button6">Y-Scale Down</button>
+            <button id="zup" class="button button5">Z-Scale Up</button>
+            <button id="zdown" class="button button6">Z-Scale Down</button>
+        </div>
+    </div>
+</body>
+
+</html>
